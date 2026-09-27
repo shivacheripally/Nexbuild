@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
+import { ArrowRight, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Loader as Loader2 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { services } from '../data/site'
 import SectionHeading from '../components/SectionHeading'

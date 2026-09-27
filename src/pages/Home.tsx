@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Compass, Palette, Layout, Code, TrendingUp, LifeBuoy, Star } from 'lucide-react'
+import { ArrowRight, Compass, Palette, LayoutGrid as Layout, Code, TrendingUp, LifeBuoy, Star } from 'lucide-react'
 import { services, projects, stats, testimonials } from '../data/site'
 import SectionHeading from '../components/SectionHeading'
 
