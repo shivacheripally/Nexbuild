@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Compass, Palette, LayoutGrid as Layout, Code, TrendingUp, LifeBuoy, Star } from 'lucide-react'
 import { services, projects, stats, testimonials } from '../data/site'
 import SectionHeading from '../components/SectionHeading'
+import DraftingHud from '../components/DraftingHud'
+import ScrollReveal from '../components/ScrollReveal'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   compass: Compass,
@@ -15,15 +17,22 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 export default function Home() {
   return (
     <>
+      <DraftingHud />
+
       {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28">
+      <section id="hero" className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="absolute inset-0 grid-pattern opacity-50" />
         <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-brand-500/10 blur-[120px]" />
+        <div className="hero-crosshair" aria-hidden="true">
+          <span />
+          <span />
+        </div>
         <div className="container-x relative">
-          <div className="mx-auto max-w-4xl text-center">
+          <ScrollReveal className="mx-auto max-w-4xl text-center" eager>
             <span className="section-label justify-center">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
-              Digital Product Studio
+              <span>Digital Product Studio</span>
+              <span className="section-label-code">SYS_00</span>
             </span>
             <h1 className="heading-1 mt-6 text-white text-balance">
               We design, build, and grow <span className="gradient-text">digital products</span> that move businesses forward.
@@ -40,24 +49,26 @@ export default function Home() {
                 View our work
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Stats bar */}
-          <div className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-8 lg:grid-cols-4">
+          <ScrollReveal className="mx-auto mt-20 max-w-4xl" delay={120}>
+            <div className="hud-stats-grid grid grid-cols-2 gap-8 lg:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-display text-4xl font-bold text-white">{stat.value}</div>
                 <div className="mt-1 text-sm text-ink-500">{stat.label}</div>
               </div>
             ))}
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Services preview */}
-      <section className="py-20 lg:py-28">
+      <section id="services" className="scroll-mt-20 py-20 lg:py-28">
         <div className="container-x">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <ScrollReveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading
               label="What we do"
               title="Six disciplines, one team"
@@ -67,7 +78,7 @@ export default function Home() {
               All services
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </ScrollReveal>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {
@@ -95,9 +106,9 @@ export default function Home() {
       </section>
 
       {/* Featured work */}
-      <section className="border-y border-ink-800 bg-ink-900/30 py-20 lg:py-28">
+      <section id="case-studies" className="scroll-mt-20 border-y border-ink-800 bg-ink-900/30 py-20 lg:py-28">
         <div className="container-x">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <ScrollReveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading
               label="Selected work"
               title="Products we are proud of"
@@ -107,7 +118,7 @@ export default function Home() {
               All case studies
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </ScrollReveal>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {projects.slice(0, 4).map((project, i) => (
@@ -141,14 +152,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Architecture */}
+      <section id="architecture" className="scroll-mt-20 overflow-hidden py-20 lg:py-28">
+        <div className="container-x">
+          <ScrollReveal>
+            <div className="architecture-panel">
+              <div className="architecture-orbit architecture-orbit-one" aria-hidden="true" />
+              <div className="architecture-orbit architecture-orbit-two" aria-hidden="true" />
+              <div className="architecture-copy">
+                <span className="section-label">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent-400" />
+                  Architecture
+                  <span className="section-label-code">SYS_03</span>
+                </span>
+                <h2 className="heading-2 mt-5 text-white text-balance">Built for the next move.</h2>
+                <p className="prose-muted mt-4 max-w-xl">
+                  Strategy, craft, and resilient engineering in one connected system. Every layer is designed to make the next decision clearer.
+                </p>
+              </div>
+              <div className="architecture-map" aria-label="Nexbuild delivery system">
+                <div className="architecture-node architecture-node-primary">NEXBUILD</div>
+                <div className="architecture-connector architecture-connector-one" />
+                <div className="architecture-connector architecture-connector-two" />
+                <div className="architecture-node architecture-node-secondary architecture-node-top">STRATEGY</div>
+                <div className="architecture-node architecture-node-secondary architecture-node-bottom">CRAFT</div>
+                <div className="architecture-node architecture-node-secondary architecture-node-right">GROWTH</div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-20 lg:py-28">
         <div className="container-x">
-          <SectionHeading
-            label="Client stories"
-            title="Trusted by teams who ship"
-            align="center"
-          />
+          <ScrollReveal>
+            <SectionHeading
+              label="Client stories"
+              title="Trusted by teams who ship"
+              align="center"
+            />
+          </ScrollReveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {testimonials.map((t) => (
               <div key={t.author} className="card p-8">
@@ -169,9 +213,9 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 lg:py-28">
+      <section id="contact" className="scroll-mt-20 py-20 lg:py-28">
         <div className="container-x">
-          <div className="relative overflow-hidden rounded-3xl border border-ink-800 bg-gradient-to-br from-ink-900 via-ink-900 to-brand-900/30 p-10 lg:p-16">
+          <ScrollReveal className="relative overflow-hidden rounded-3xl border border-ink-800 bg-gradient-to-br from-ink-900 via-ink-900 to-brand-900/30 p-10 lg:p-16">
             <div className="absolute right-0 top-0 -z-0 h-[300px] w-[300px] rounded-full bg-brand-500/10 blur-[100px]" />
             <div className="relative max-w-2xl">
               <h2 className="heading-2 text-white text-balance">
@@ -190,7 +234,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

@@ -74,3 +74,360 @@
     box-shadow: 0 0 80px -20px rgba(42, 157, 114, 0.3);
   }
 }
+
+@layer components {
+  .hud-corner {
+    @apply fixed z-10 flex flex-col gap-1 border-l border-ink-700/70 pl-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500;
+    background: linear-gradient(90deg, rgba(15, 17, 22, 0.8), transparent);
+  }
+  .hud-corner-top-left {
+    left: 1.25rem;
+    top: 5.25rem;
+    display: flex;
+  }
+  .hud-corner-bottom-left {
+    bottom: 1.25rem;
+    left: 1.25rem;
+  }
+  .hud-corner-bottom-right {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    align-items: flex-end;
+    border-left: 0;
+    border-right: 1px solid rgba(67, 75, 93, 0.7);
+    padding-left: 0;
+    padding-right: 0.75rem;
+    text-align: right;
+    background: linear-gradient(270deg, rgba(15, 17, 22, 0.8), transparent);
+  }
+  .hud-kicker {
+    color: #5a6478;
+    font-size: 9px;
+  }
+  .hud-readout {
+    color: #aee3cd;
+  }
+  .hud-value {
+    color: #e8eaef;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .hud-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #48b88b;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+  .hud-status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: #48b88b;
+    box-shadow: 0 0 10px rgba(72, 184, 139, 0.9);
+  }
+  .hud-radar {
+    @apply fixed right-3 top-1/2 -translate-y-1/2;
+    width: 7.5rem;
+  }
+  .hud-radar-heading {
+    @apply mb-3 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-500;
+  }
+  .hud-radar-line {
+    height: 1px;
+    flex: 1;
+    background: #353c4a;
+  }
+  .hud-mission-list {
+    @apply flex flex-col gap-1;
+  }
+  .hud-mission {
+    @apply relative flex items-center gap-2 rounded-md px-2 py-2 text-left font-mono text-[10px] uppercase tracking-[0.12em] text-ink-600 transition-colors duration-200;
+  }
+  .hud-mission:hover,
+  .hud-mission:focus-visible {
+    @apply bg-ink-900/80 text-ink-300 outline-none;
+  }
+  .hud-mission-code {
+    width: 1rem;
+    color: #434b5d;
+  }
+  .hud-mission-dot {
+    width: 5px;
+    height: 5px;
+    flex: 0 0 auto;
+    border: 1px solid #434b5d;
+    border-radius: 999px;
+    transition: all 200ms ease;
+  }
+  .hud-mission-label {
+    white-space: nowrap;
+  }
+  .hud-mission.is-active {
+    @apply text-brand-300;
+  }
+  .hud-mission.is-active .hud-mission-code {
+    color: #48b88b;
+  }
+  .hud-mission.is-active .hud-mission-dot {
+    border-color: #7cd0ae;
+    background: #48b88b;
+    box-shadow: 0 0 12px rgba(72, 184, 139, 0.9);
+  }
+  .hud-mission.is-active::before {
+    position: absolute;
+    left: -0.75rem;
+    height: 1px;
+    width: 0.5rem;
+    background: #48b88b;
+    content: '';
+  }
+  .hud-corner-top-left {
+    gap: 0.5rem;
+  }
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 700ms ease var(--reveal-delay, 0ms),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  }
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .hero-crosshair {
+    position: absolute;
+    right: 13%;
+    top: 33%;
+    width: 9rem;
+    height: 9rem;
+    border: 1px solid rgba(72, 184, 139, 0.2);
+    border-radius: 999px;
+    opacity: 0.7;
+    transform: translate(50%, -50%);
+  }
+  .hero-crosshair::before,
+  .hero-crosshair::after,
+  .hero-crosshair span::before,
+  .hero-crosshair span::after {
+    position: absolute;
+    background: rgba(72, 184, 139, 0.35);
+    content: '';
+  }
+  .hero-crosshair::before,
+  .hero-crosshair::after {
+    left: 50%;
+    top: -0.6rem;
+    width: 1px;
+    height: calc(100% + 1.2rem);
+  }
+  .hero-crosshair::after {
+    left: -0.6rem;
+    top: 50%;
+    width: calc(100% + 1.2rem);
+    height: 1px;
+  }
+  .hero-crosshair span:first-child {
+    position: absolute;
+    inset: 0.8rem;
+    border: 1px dashed rgba(72, 184, 139, 0.25);
+    border-radius: 999px;
+  }
+  .hero-crosshair span:last-child {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 999px;
+    background: #ffc04a;
+    box-shadow: 0 0 16px rgba(255, 192, 74, 0.7);
+    transform: translate(-50%, -50%);
+  }
+  .section-label-code {
+    @apply border-l border-ink-700 pl-2 font-mono text-[9px] tracking-[0.15em] text-ink-500;
+  }
+  .hud-stats-grid {
+    position: relative;
+  }
+  .hud-stats-grid::before,
+  .hud-stats-grid::after {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(transparent, #353c4a, transparent);
+    content: '';
+  }
+  .hud-stats-grid::before {
+    left: 25%;
+  }
+  .hud-stats-grid::after {
+    right: 25%;
+  }
+  .architecture-panel {
+    position: relative;
+    min-height: 25rem;
+    overflow: hidden;
+    border: 1px solid #252a35;
+    border-radius: 1.5rem;
+    background:
+      linear-gradient(rgba(72, 184, 139, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(72, 184, 139, 0.04) 1px, transparent 1px),
+      #141820;
+    background-size: 32px 32px;
+  }
+  .architecture-panel::after {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 75% 50%, rgba(42, 157, 114, 0.12), transparent 30%);
+    content: '';
+    pointer-events: none;
+  }
+  .architecture-copy {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem;
+  }
+  .architecture-map {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    width: 23rem;
+    height: 19rem;
+    transform: translateY(-50%);
+  }
+  .architecture-node {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+  }
+  .architecture-node-primary {
+    left: 50%;
+    top: 50%;
+    width: 7.5rem;
+    height: 3.5rem;
+    border: 1px solid #7cd0ae;
+    color: #d6f1e6;
+    background: rgba(42, 157, 114, 0.22);
+    box-shadow: 0 0 32px rgba(42, 157, 114, 0.2);
+    transform: translate(-50%, -50%);
+  }
+  .architecture-node-secondary {
+    width: 6.5rem;
+    height: 2.4rem;
+    border: 1px solid #434b5d;
+    color: #aab1c1;
+    background: rgba(26, 29, 38, 0.88);
+  }
+  .architecture-node-top {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+  .architecture-node-bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .architecture-node-right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .architecture-connector {
+    position: absolute;
+    z-index: 1;
+    background: #434b5d;
+  }
+  .architecture-connector-one {
+    left: calc(50% - 1px);
+    top: 2.4rem;
+    width: 1px;
+    height: calc(50% - 4.1rem);
+  }
+  .architecture-connector-one::after {
+    position: absolute;
+    bottom: -4.4rem;
+    left: 0;
+    width: 1px;
+    height: 4.4rem;
+    background: #434b5d;
+    content: '';
+  }
+  .architecture-connector-two {
+    left: calc(50% + 3.75rem);
+    top: 50%;
+    width: calc(50% - 3.75rem);
+    height: 1px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hud-corner-top-left {
+    display: none;
+  }
+  .hud-radar {
+    right: 0.5rem;
+    width: 1.25rem;
+  }
+  .hud-radar-heading {
+    display: none;
+  }
+  .hud-mission {
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+  .hud-mission-code,
+  .hud-mission-label {
+    display: none;
+  }
+  .hud-mission.is-active::before {
+    left: -0.5rem;
+    width: 0.3rem;
+  }
+  .hero-crosshair {
+    right: 0;
+    top: 18%;
+    opacity: 0.35;
+    transform: translate(50%, -50%) scale(0.7);
+  }
+  .architecture-copy {
+    padding: 2rem;
+  }
+  .architecture-map {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: calc(100% - 4rem);
+    height: 13rem;
+    margin: 0 2rem 2rem;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

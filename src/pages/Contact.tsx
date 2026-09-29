@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ArrowRight, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Loader as Loader2 } from 'lucide-react'
-import { supabase } from '../lib/supabase'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db, firebaseConfigured } from '../lib/firebase'
 import { services } from '../data/site'
 import SectionHeading from '../components/SectionHeading'
 
@@ -60,16 +61,23 @@ export default function Contact() {
       return
     }
 
-    const { error } = await supabase.from('contact_submissions').insert({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      company: form.company.trim() || null,
-      budget: form.budget || null,
-      service: form.service || null,
-      message: form.message.trim(),
-    })
+    if (!firebaseConfigured) {
+      setStatus('error')
+      setErrorMsg('Firebase is not configured yet. Please add the VITE_FIREBASE_* variables or email us directly.')
+      return
+    }
 
-    if (error) {
+    try {
+      await addDoc(collection(db, 'contact_submissions'), {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        company: form.company.trim() || null,
+        budget: form.budget || null,
+        service: form.service || null,
+        message: form.message.trim(),
+        createdAt: serverTimestamp(),
+      })
+    } catch {
       setStatus('error')
       setErrorMsg('Something went wrong on our end. Please try again or email us directly.')
       return
