@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Loader as Loader2 } from 'lucide-react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db, firebaseConfigured } from '../lib/firebase'
 import { services } from '../data/site'
 import SectionHeading from '../components/SectionHeading'
+import { PROJECT_BRIEF_STORAGE_KEY } from '../lib/projectBrief'
 
 const budgetOptions = [
   'Under $10k',
@@ -36,6 +37,17 @@ export default function Contact() {
   const [form, setForm] = useState<FormState>(initialForm)
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+
+  useEffect(() => {
+    const brief = window.sessionStorage.getItem(PROJECT_BRIEF_STORAGE_KEY)
+    if (!brief) return
+
+    setForm((current) => ({
+      ...current,
+      message: current.message ? `${current.message}\n\n${brief}` : brief,
+    }))
+    window.sessionStorage.removeItem(PROJECT_BRIEF_STORAGE_KEY)
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>

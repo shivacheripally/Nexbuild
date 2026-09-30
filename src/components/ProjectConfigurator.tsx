@@ -1,8 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, Check, Gauge, Layers3, RotateCcw, Zap } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-
-export const PROJECT_BRIEF_STORAGE_KEY = 'nexbuild-project-brief'
+import { PROJECT_BRIEF_STORAGE_KEY } from '../lib/projectBrief'
 
 type Platform = 'web' | 'mobile' | 'cloud'
 type Delivery = 'sprint' | 'phased'

@@ -1,0 +1,1 @@
+export const PROJECT_BRIEF_STORAGE_KEY = 'nexbuild-project-brief'
