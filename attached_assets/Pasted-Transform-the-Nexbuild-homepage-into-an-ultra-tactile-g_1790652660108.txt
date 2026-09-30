@@ -1,0 +1,36 @@
+Transform the Nexbuild homepage into an ultra-tactile, game-inspired interactive experience with rich visual attraction and smooth scroll animations. 
+
+STRICT CONSTRAINTS:
+- NO audio, sounds, or sound effects of any kind.
+- NO video backgrounds or video elements (purely CSS, SVG, HTML5 Canvas, and React micro-interactions).
+- Maintain 60fps performance and respect `prefers-reduced-motion`.
+- Maintain the current sleek dark drafting-table theme (slate/navy palette with primary electric accents).
+
+IMPLEMENT THE FOLLOWING GAME-INSPIRED MECHANICS:
+
+1. Dynamic Drafting HUD (Heads-Up Display)
+- Top/Bottom corner telemetry: A subtle sticky overlay displaying live X/Y cursor tracking coordinates, a scroll depth percentage indicator, and a glowing status indicator ("SYSTEM: ONLINE // 60 FPS").
+- Interactive Level Radar / Mini-Map: A persistent vertical dot-matrix index on the right edge indicating the user's current "mission" (Hero -> 01 Services -> 02 Case Studies -> 03 Architecture -> 04 Contact) that lights up and lets users click to smooth-scroll to sections.
+
+2. Interactive Project Spec Configurator (Inspired by Royal Enfield / Triumph Configurators)
+- Build an interactive "Build Engine / Project Configurator" widget in the showcase section:
+  * Interactive selectors for project parameters: Platform (Web Platform, Mobile App, Cloud Infrastructure), Delivery Speed (Sprint vs. Phased), and Complexity Level.
+  * Real-time reactive visual feedback: An animated SVG technical wireframe/blueprint that dynamically highlights subsystems, recalculates estimated milestone timelines, and displays animated metric bars as options are toggled.
+  * A "Load into Brief" action button that automatically pre-populates the contact enquiry form below with the selected configuration.
+
+3. 3D Gyroscopic & Tilt Cards (CSS 3D Perspective)
+- Case study and service cards with interactive 3D perspective tilt following the user's cursor hover, complete with dynamic radial glare/light sheen overlay that follows cursor position.
+- Expandable "Deep Scan" case study inspection drawer or modal revealing technical blueprints, architecture schematics, and animated counter metrics (e.g. counting up from 0 to 100+ files and 85% accuracy on viewport intersection).
+
+4. Interactive Canvas Grid Matrix (No Video)
+- Add a lightweight HTML5 Canvas background behind the drafting grid that subtly warps or emits radiant particle waves on cursor movement and scroll velocity, giving depth without video assets or CPU overhead.
+- Subtle scanline and blueprint grid overlay with a floating crosshair cursor follower (automatically disabled on touch screens and mobile).
+
+5. Tactile Scroll & Reveal Micro-Interactions (Inspired by Bragg & Bahama Buck's)
+- Kinetic scroll typography: Heading accents that slide and clip into view with smooth spring physics when entering the viewport.
+- Milestone / Process timeline: An interactive step-by-step progress pipeline where scrolling fills an energy line connecting each milestone step (Discovery -> Architecture -> Build -> Launch), illuminating active step nodes.
+- Interactive terminal pill toggles: A quick toggle allowing users to switch view modes between "Executive Summary" and "Blueprint / Engineering Mode" (revealing wireframe grid lines and raw technical specs).
+
+6. Responsive Polish & Accessibility
+- Ensure all interactive widgets fall back smoothly on mobile screens with touch-friendly sliders and tap states.
+- Clean semantic HTML structure with full keyboard navigation and screen reader support.
