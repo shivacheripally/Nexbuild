@@ -4,6 +4,7 @@ import { services, projects, stats, testimonials } from '../data/site'
 import SectionHeading from '../components/SectionHeading'
 import DraftingHud from '../components/DraftingHud'
 import ScrollReveal from '../components/ScrollReveal'
+import ProjectConfigurator from '../components/ProjectConfigurator'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   compass: Compass,
@@ -149,6 +150,15 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Build engine */}
+      <section className="py-20 lg:py-28">
+        <div className="container-x">
+          <ScrollReveal>
+            <ProjectConfigurator />
+          </ScrollReveal>
         </div>
       </section>
 
