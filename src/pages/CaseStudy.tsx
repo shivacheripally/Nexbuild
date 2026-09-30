@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Clock, Calendar } from 'lucide-react'
 import { projects } from '../data/site'
+import TiltCard from '../components/TiltCard'
+import DeepScanInspector from '../components/DeepScanInspector'
 
 export default function CaseStudy() {
   const { slug } = useParams()
@@ -53,6 +55,7 @@ export default function CaseStudy() {
               </span>
             ))}
           </div>
+          {project.slug === 'deep-scan' && <div className="mt-8"><DeepScanInspector /></div>}
         </div>
       </section>
 
@@ -99,22 +102,20 @@ export default function CaseStudy() {
           </div>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             {otherProjects.map((p) => (
-              <Link
-                key={p.slug}
-                to={`/work/${p.slug}`}
-                className="card group overflow-hidden p-0 transition-all duration-300 hover:border-brand-500/50"
-              >
-                <div className="relative h-40 overflow-hidden bg-gradient-to-br from-brand-600/20 via-ink-800 to-ink-900">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-5xl font-bold text-white/5">{p.title.charAt(0)}</span>
+              <TiltCard key={p.slug} className="card group overflow-hidden p-0 hover:border-brand-500/50">
+                <Link to={`/work/${p.slug}`} className="block">
+                  <div className="relative h-40 overflow-hidden bg-gradient-to-br from-brand-600/20 via-ink-800 to-ink-900">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-display text-5xl font-bold text-white/5">{p.title.charAt(0)}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-brand-400">{p.category}</span>
-                  <h3 className="mt-2 font-display text-lg font-semibold text-white">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-400">{p.summary}</p>
-                </div>
-              </Link>
+                  <div className="p-6">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-brand-400">{p.category}</span>
+                    <h3 className="mt-2 font-display text-lg font-semibold text-white">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-400">{p.summary}</p>
+                  </div>
+                </Link>
+              </TiltCard>
             ))}
           </div>
         </div>

@@ -5,6 +5,8 @@ import SectionHeading from '../components/SectionHeading'
 import DraftingHud from '../components/DraftingHud'
 import ScrollReveal from '../components/ScrollReveal'
 import ProjectConfigurator from '../components/ProjectConfigurator'
+import TiltCard from '../components/TiltCard'
+import DeepScanInspector from '../components/DeepScanInspector'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   compass: Compass,
@@ -85,21 +87,19 @@ export default function Home() {
             {services.map((service) => {
               const Icon = iconMap[service.icon]
               return (
-                <Link
-                  key={service.slug}
-                  to="/services"
-                  className="card group p-6 transition-all duration-300 hover:border-brand-500/50 hover:bg-ink-900"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500/10 text-brand-400 transition-colors group-hover:bg-brand-500/20">
-                    {Icon && <Icon className="h-6 w-6" />}
-                  </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-white">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-400">{service.tagline}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-400 opacity-0 transition-opacity group-hover:opacity-100">
-                    Learn more
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </Link>
+                <TiltCard key={service.slug} className="card group h-full p-6 hover:border-brand-500/50 hover:bg-ink-900">
+                  <Link to="/services" className="block h-full">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500/10 text-brand-400 transition-colors group-hover:bg-brand-500/20">
+                      {Icon && <Icon className="h-6 w-6" />}
+                    </div>
+                    <h3 className="mt-5 font-display text-lg font-semibold text-white">{service.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-400">{service.tagline}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-400 opacity-0 transition-opacity group-hover:opacity-100">
+                      Learn more
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </Link>
+                </TiltCard>
               )
             })}
           </div>
@@ -123,31 +123,31 @@ export default function Home() {
 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {projects.slice(0, 4).map((project, i) => (
-              <Link
+              <TiltCard
                 key={project.slug}
-                to={`/work/${project.slug}`}
-                className={`card group overflow-hidden p-0 transition-all duration-300 hover:border-brand-500/50 ${
-                  i === 0 ? 'lg:col-span-2' : ''
-                }`}
+                className={`card group overflow-hidden p-0 hover:border-brand-500/50 ${i === 0 ? 'lg:col-span-2' : ''}`}
               >
-                <div className={`relative ${i === 0 ? 'h-64 lg:h-80' : 'h-56'} overflow-hidden bg-ink-800`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-600/30 via-ink-800 to-ink-900" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-5xl font-bold text-white/10">{project.title.charAt(0)}</span>
+                <Link to={`/work/${project.slug}`} className="block">
+                  <div className={`relative ${i === 0 ? 'h-64 lg:h-80' : 'h-56'} overflow-hidden bg-ink-800`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-600/30 via-ink-800 to-ink-900" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-display text-5xl font-bold text-white/10">{project.title.charAt(0)}</span>
+                    </div>
+                    <div className="absolute bottom-4 left-4 rounded-full bg-ink-950/80 px-3 py-1 text-xs font-medium text-ink-300 backdrop-blur-sm">
+                      {project.category}
+                    </div>
                   </div>
-                  <div className="absolute bottom-4 left-4 rounded-full bg-ink-950/80 px-3 py-1 text-xs font-medium text-ink-300 backdrop-blur-sm">
-                    {project.category}
+                  <div className="p-6">
+                    <h3 className="font-display text-xl font-semibold text-white">{project.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-400">{project.summary}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-400 transition-transform group-hover:translate-x-1">
+                      Read case study
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold text-white">{project.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-400">{project.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-400 transition-transform group-hover:translate-x-1">
-                    Read case study
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </Link>
+                </Link>
+                {project.slug === 'deep-scan' && <div className="px-6 pb-5"><DeepScanInspector compact /></div>}
+              </TiltCard>
             ))}
           </div>
         </div>

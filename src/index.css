@@ -73,6 +73,230 @@
   .glow {
     box-shadow: 0 0 80px -20px rgba(42, 157, 114, 0.3);
   }
+  .tilt-shell {
+    perspective: 1100px;
+    transform-style: preserve-3d;
+  }
+  .tilt-card {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    --glare-x: 50%;
+    --glare-y: 50%;
+    position: relative;
+    isolation: isolate;
+    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform-style: preserve-3d;
+    transition: transform 260ms cubic-bezier(0.2, 0.75, 0.25, 1), border-color 220ms ease, background-color 220ms ease;
+    will-change: transform;
+  }
+  .tilt-card::after {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(340px circle at var(--glare-x) var(--glare-y), rgba(174, 227, 205, 0.11), transparent 68%);
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+  }
+  .tilt-card.is-tilting::after,
+  .tilt-card:focus-within::after {
+    opacity: 1;
+  }
+  .tilt-card:focus-visible {
+    outline: 2px solid #7cd0ae;
+    outline-offset: 4px;
+  }
+  .deep-scan-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(72, 184, 139, 0.4);
+    border-radius: 999px;
+    background: rgba(42, 157, 114, 0.1);
+    padding: 0.65rem 0.9rem;
+    color: #aee3cd;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+  }
+  .deep-scan-trigger:hover,
+  .deep-scan-trigger:focus-visible {
+    border-color: #7cd0ae;
+    background: rgba(42, 157, 114, 0.2);
+    color: #e6fff4;
+    outline: none;
+  }
+  .scan-backdrop {
+    position: fixed;
+    z-index: 80;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    background: rgba(5, 8, 11, 0.78);
+    padding: 1rem;
+    backdrop-filter: blur(12px);
+    animation: scan-fade-in 220ms ease both;
+  }
+  .scan-dialog {
+    position: relative;
+    width: min(100%, 68rem);
+    max-height: min(92dvh, 56rem);
+    overflow-y: auto;
+    border: 1px solid #353c4a;
+    border-radius: 1.4rem;
+    background:
+      linear-gradient(rgba(72, 184, 139, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(72, 184, 139, 0.035) 1px, transparent 1px),
+      #141820;
+    background-size: 28px 28px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.55);
+    animation: scan-panel-in 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .scan-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid #252a35;
+    padding: 1.5rem;
+  }
+  .scan-kicker {
+    color: #7cd0ae;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .scan-close {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #353c4a;
+    border-radius: 50%;
+    color: #aab1c1;
+    transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+  }
+  .scan-close:hover,
+  .scan-close:focus-visible {
+    border-color: #7cd0ae;
+    background: rgba(42, 157, 114, 0.12);
+    color: white;
+    outline: none;
+  }
+  .scan-body {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .scan-blueprint {
+    position: relative;
+    min-height: 19rem;
+    overflow: hidden;
+    border: 1px solid #353c4a;
+    border-radius: 0.9rem;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(42, 157, 114, 0.13), transparent 38%),
+      rgba(9, 13, 17, 0.72);
+  }
+  .scan-blueprint::before {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(72,184,139,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(72,184,139,.07) 1px, transparent 1px);
+    background-size: 20px 20px;
+    content: '';
+    mask-image: linear-gradient(transparent, black 18%, black 82%, transparent);
+  }
+  .scan-blueprint svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 19rem;
+  }
+  .scan-blueprint .scan-link {
+    fill: none;
+    stroke: rgba(124, 208, 174, 0.66);
+    stroke-width: 1.2;
+    stroke-dasharray: 5 6;
+    animation: scan-dash 18s linear infinite;
+  }
+  .scan-blueprint .scan-node rect {
+    fill: rgba(20, 24, 32, 0.96);
+    stroke: #48b88b;
+    stroke-width: 1;
+  }
+  .scan-blueprint .scan-node text {
+    fill: #d6f1e6;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  .scan-blueprint .scan-node circle {
+    fill: #ffc04a;
+  }
+  .scan-blueprint .scan-orbit {
+    fill: none;
+    stroke: rgba(124, 208, 174, 0.36);
+    stroke-dasharray: 2 7;
+    transform-origin: 280px 150px;
+    animation: radar-spin 32s linear infinite;
+  }
+  .scan-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .scan-metric {
+    border: 1px solid #353c4a;
+    border-radius: 0.85rem;
+    background: rgba(20, 24, 32, 0.8);
+    padding: 1.15rem;
+  }
+  .scan-metric-value {
+    color: #e6fff4;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(2rem, 6vw, 3.3rem);
+    font-weight: 600;
+    letter-spacing: -0.08em;
+    line-height: 1;
+  }
+  .scan-metric-label {
+    margin-top: 0.65rem;
+    color: #8f99ac;
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+  .scan-sample-note {
+    border-left: 2px solid #ffc04a;
+    background: rgba(255, 192, 74, 0.055);
+    padding: 0.8rem 1rem;
+    color: #aab1c1;
+    font-size: 0.75rem;
+    line-height: 1.55;
+  }
+  .scan-sample-note strong {
+    color: #ffd681;
+    font-weight: 600;
+  }
+  @keyframes scan-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scan-panel-in {
+    from { opacity: 0; transform: translateY(18px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes scan-dash {
+    to { stroke-dashoffset: -110; }
+  }
 }
 
 @layer components {
@@ -761,6 +985,33 @@
   }
   .configurator-brief-button {
     justify-content: center;
+  }
+  .scan-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .scan-dialog {
+    width: 100%;
+    max-height: 94dvh;
+    border-radius: 1.2rem 1.2rem 0 0;
+  }
+  .scan-header,
+  .scan-body {
+    padding: 1.15rem;
+  }
+  .scan-blueprint,
+  .scan-blueprint svg {
+    min-height: 14rem;
+  }
+  .scan-metrics {
+    gap: 0.65rem;
+  }
+  .scan-metric {
+    padding: 0.85rem;
+  }
+  .tilt-card {
+    transform: none !important;
+    will-change: auto;
   }
 }
 

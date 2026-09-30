@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Check, Compass, Palette, LayoutGrid as Layout, Code, TrendingUp, LifeBuoy } from 'lucide-react'
 import { services, faqs } from '../data/site'
 import SectionHeading from '../components/SectionHeading'
+import TiltCard from '../components/TiltCard'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   compass: Compass,
@@ -33,7 +34,7 @@ export default function Services() {
           {services.map((service, i) => {
             const Icon = iconMap[service.icon]
             return (
-              <div
+              <TiltCard
                 key={service.slug}
                 id={service.slug}
                 className="card scroll-mt-24 p-8 lg:p-10"
@@ -63,7 +64,7 @@ export default function Services() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             )
           })}
         </div>

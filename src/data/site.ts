@@ -93,6 +93,22 @@ export const services = [
 
 export const projects = [
   {
+    slug: 'deep-scan',
+    title: 'Deep Scan',
+    category: 'Product Intelligence · Technical Demo',
+    summary:
+      'An illustrative product-inspection concept that turns system architecture into a clear, navigable view for teams making their next move.',
+    challenge:
+      'Teams need a shared way to discuss product structure without burying decisions in disconnected diagrams and technical notes. This concept explores how a concise inspection view could make the relationships between experience, services, data, and delivery easier to discuss.',
+    approach:
+      'We framed the concept around a layered architecture map, compact system signals, and a focused inspection panel. The interface is intentionally presented as a visual sample rather than a live analysis product.',
+    result:
+      'The resulting demo brings the system into one readable view. All blueprint elements and displayed indicators are illustrative only; they are not generated from a real scan or measured client data.',
+    services: ['Strategy & Consulting', 'Web & Product Design', 'Engineering & Development'],
+    duration: 'Concept demo',
+    year: '2025',
+  },
+  {
     slug: 'lumen-finance',
     title: 'Lumen Finance',
     category: 'Fintech · Web App',
